@@ -1,0 +1,27 @@
+1. Install compiler.
+
+$ sudo apt install racket
+
+2. Build waxeye binary.
+
+Note: make sure that you are in waxeye project root directory at this point.
+
+$ PLTCOLLECTS=":$PWD/src/scheme/" raco exe -o ./waxeye src/waxeye/waxeye.scm
+
+3. Generate C parser from grammar.
+
+$ ./waxeye -g c ./fuzz/ ./grammars/calc.waxeye
+
+4. Build waxeye C library.
+
+$ cd src/c
+$ make
+
+5. Build parsing example.
+
+$ cd ../../fuzz
+$ make
+
+6. Observe crash.
+
+$ ./a.out testcase_crash
